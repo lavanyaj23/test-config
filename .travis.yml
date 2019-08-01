@@ -4,7 +4,13 @@ script:
 before_deploy:
   - export TAGNAME=$(grep -P "^## .*?" CHANGELOG.md -m1 | awk '{print $2}' |awk '{print $1}')
   - git tag $TAGNAME 
-  - git push origin --tags
+deploy:
+  provider: releases
+  user: lavanyaj23
+  password: $gitpwd
+  skip_cleanup: true
+  on:
+    tags: true
 deploy:
   - provider: pypi
     user: $pypiusername
