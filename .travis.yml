@@ -2,8 +2,8 @@ language: python
 script:
   - touch foo
 before_deploy:
-  - export TAGNAME=$(grep -P "^## .*?" CHANGELOG.md -m1 | awk '{print $2}' |awk '{print $1}')
-  - git tag $TAGNAME 
+  - export TRAVIS_TAG=$(grep -P "^## .*?" CHANGELOG.md -m1 | awk '{print $2}' |awk '{print $1}')
+  - git tag $TRAVIS_TAG 
 deploy:
   provider: releases
   user: lavanyaj23
