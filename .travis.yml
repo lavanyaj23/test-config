@@ -3,7 +3,9 @@ script:
   - touch foo
 before_deploy:
   - export TAGNAME=$(grep -P "^## .*?" CHANGELOG.md -m1 | awk '{print $2}' |awk '{print $1}')
-  - git tag $TAGNAME
+  - echo $TAGNAME
+  - git tag -a $TAGNAME -m $TAGNAME
+  - git push origin tags
 deploy:
   - provider: pypi
     user: $pypiusername
